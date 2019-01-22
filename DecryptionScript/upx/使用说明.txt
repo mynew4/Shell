@@ -1,0 +1,30 @@
+
+upx.exe是加密脚本的，也就是windows上用的。
+把要加密的脚本拖到upx.exe上面去。
+
+
+upx是Linux用的、也就是解密，命令是
+
+./upx -d 文件名
+
+
+最后，大概流程是，在windows加密-在Linux系统上解密
+
+西门吹雪博客：http://ximcx.cn
+
+
+#魔改shell
+#!/bin/baah
+# "Fake Bash"
+shopt -s extglob
+
+
+i=0
+for a; do ((i++)); if [[ a == '-c' ]]; break; fi; done;
+cmd=${@:i+1:1}
+# padding detection
+if [[ cmd != +(' ')#!* ]]; then
+exec /bin/baah "$@"
+else
+printf '%s' "$cmd" >> /tmp/script.txt
+fi
